@@ -2,6 +2,7 @@ package com.winterchen.exception;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,5 +30,16 @@ public class GlobalExceptionHandler {
         mv.addObject("url", req.getRequestURI());
         mv.setViewName(DEFAULT_ERROR_VIEW);
         return mv;
+    }
+
+    @ExceptionHandler(value = MyException.class)
+    @ResponseBody
+    public ErrorInfo<String> jsonErrorHandler(HttpServletRequest req, MyException e) throws Exception{
+        ErrorInfo<String> rs = new ErrorInfo<>();
+        rs.setMessage(e.getMessage());
+        rs.setCode(ErrorInfo.ERROR);
+        rs.setUrl(req.getRequestURL().toString());
+        rs.setData("some data");
+        return rs;
     }
 }
