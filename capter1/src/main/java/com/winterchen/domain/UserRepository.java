@@ -1,4 +1,4 @@
-package com.winterchen.domain.p;
+package com.winterchen.domain;
 
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CachePut;

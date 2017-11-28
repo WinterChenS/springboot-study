@@ -1,6 +1,6 @@
 package com.winterchen.web;
 
-import com.winterchen.domain.p.User;
+import com.winterchen.domain.User;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;

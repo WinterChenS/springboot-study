@@ -1,4 +1,4 @@
-package com.winterchen.domain.s;
+package com.winterchen.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -6,24 +6,29 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 /**
+ *
  * Created by Administrator on 2017/11/21.
  */
 @Entity
-public class Message {
+public class User {
 
     @Id
     @GeneratedValue
     private Long id;
+
     @Column(nullable = false)
     private String name;
+
     @Column(nullable = false)
-    private String content;
+    private Integer age;
 
-    public Message(){}
+    public User() {
+        super();
+    }
 
-    public Message(String name, String content) {
+    public User(String name, Integer age) {
         this.name = name;
-        this.content = content;
+        this.age = age;
     }
 
     public Long getId() {
@@ -42,20 +47,20 @@ public class Message {
         this.name = name;
     }
 
-    public String getContent() {
-        return content;
+    public Integer getAge() {
+        return age;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
     @Override
     public String toString() {
-        return "Message{" +
+        return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", content='" + content + '\'' +
+                ", age=" + age +
                 '}';
     }
 }

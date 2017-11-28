@@ -11,16 +11,10 @@ spring:
     suffix: .html
     template-resolver-order:
   datasource:
-    primary:
-      url: jdbc:mysql://localhost:3306/mytest
-      username: root
-      password: root
-      driver-class-name: com.mysql.jdbc.Driver
-    secondary:
-      url: jdbc:mysql://localhost:3306/seckill
-      username: root
-      password: root
-      driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/mytest
+    username: root
+    password: 5236320
+    driver-class-name: com.mysql.jdbc.Driver
   jpa:
     properties:
       hibernate:
@@ -47,6 +41,9 @@ spring:
       max-wait: -1
       max-idle: 8
       min-idle: 0
+server:
+  port: 8888
+
 
 
 

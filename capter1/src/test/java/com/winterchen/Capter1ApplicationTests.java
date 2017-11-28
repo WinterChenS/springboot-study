@@ -1,36 +1,26 @@
 package com.winterchen;
 
-import com.winterchen.domain.s.Message;
-import com.winterchen.domain.s.MessageRepository;
-import com.winterchen.domain.p.User;
-import com.winterchen.domain.p.UserRepository;
-import com.winterchen.web.HelloController;
+
+import com.winterchen.domain.User;
+import com.winterchen.domain.UserRepository;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.cache.CacheManager;
 import org.springframework.core.io.FileSystemResource;
-import org.springframework.http.MediaType;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.mail.internet.MimeMessage;
 import java.io.File;
-
-import static org.hamcrest.Matchers.equalTo;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -42,13 +32,9 @@ public class Capter1ApplicationTests {
 	private UserRepository userRepository;
 
 	@Autowired
-	private MessageRepository messageRepository;
-
-	@Autowired
 	private JavaMailSender mailSender;
 
-	@Autowired
-	private CacheManager cacheManager;
+
 
 	@Before
 	public void setUp() throws Exception{
@@ -91,11 +77,7 @@ public class Capter1ApplicationTests {
 
 		Assert.assertEquals(9, userRepository.findAll().size());
 
-		messageRepository.save(new Message("o1", "aaaaaaa"));
-		messageRepository.save(new Message("o2", "bbbbbbb"));
-		messageRepository.save(new Message("o3", "ccccccc"));
 
-		Assert.assertEquals(3, messageRepository.findAll().size());
 
 	}
 
