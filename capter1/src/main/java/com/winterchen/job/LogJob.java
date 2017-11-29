@@ -21,7 +21,7 @@ public class LogJob {
     /**
      * 2秒钟执行1次
      */
-    @Scheduled(fixedRate = 2 * 1000)
+    //@Scheduled(fixedRate = 2 * 1000)
     public void logging(){
         Date now = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");

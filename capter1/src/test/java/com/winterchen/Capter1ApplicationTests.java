@@ -1,7 +1,7 @@
 package com.winterchen;
 
 
-import com.winterchen.domain.User;
+import com.winterchen.domain.UserEntity;
 import com.winterchen.domain.UserRepository;
 import org.junit.Assert;
 import org.junit.Before;
@@ -36,37 +36,39 @@ public class Capter1ApplicationTests {
 
 
 
+
+
 	@Before
 	public void setUp() throws Exception{
-		userRepository.save(new User("AAA", 10));
+		//userRepository.save(new UserEntity("AAA", 10));
 	}
 
 	@Test
 	public void selectData() throws Exception {
-		User u1 = userRepository.findByName("AAA");
+		/*UserEntity u1 = userRepository.findByName("AAA");
 		System.out.println("第一次查询：" + u1.getAge());
-		User u2 = userRepository.findByName("AAA");
+		UserEntity u2 = userRepository.findByName("AAA");
 		System.out.println("第二次查询：" + u2.getAge());
 		u2.setAge(55);
 		userRepository.save(u2);
 
-		User u3 = userRepository.findByName("AAA");
-		System.out.println("第三次查询：" + u3.getAge());
+		UserEntity u3 = userRepository.findByName("AAA");
+		System.out.println("第三次查询：" + u3.getAge());*/
 	}
 
 	@Test
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	public void addData() throws Exception{
-		userRepository.save(new User("AAA", 10));
-		userRepository.save(new User("BBB", 20));
-		userRepository.save(new User("CCC", 30));
-		userRepository.save(new User("EEE", 40));
-		userRepository.save(new User("FFF", 50));
-		userRepository.save(new User("GGG", 60));
-		userRepository.save(new User("HHH", 70));
-		userRepository.save(new User("III", 80));
-		userRepository.save(new User("JJJ", 90));
-		userRepository.save(new User("HHH", 100));
+		/*userRepository.save(new UserEntity("AAA", 10));
+		userRepository.save(new UserEntity("BBB", 20));
+		userRepository.save(new UserEntity("CCC", 30));
+		userRepository.save(new UserEntity("EEE", 40));
+		userRepository.save(new UserEntity("FFF", 50));
+		userRepository.save(new UserEntity("GGG", 60));
+		userRepository.save(new UserEntity("HHH", 70));
+		userRepository.save(new UserEntity("III", 80));
+		userRepository.save(new UserEntity("JJJ", 90));
+		userRepository.save(new UserEntity("HHH", 100));
 
 		Assert.assertEquals(10, userRepository.findAll().size());
 		Assert.assertEquals(60, userRepository.findByName("GGG").getAge().longValue());
@@ -75,7 +77,7 @@ public class Capter1ApplicationTests {
 
 		userRepository.delete(userRepository.findByName("AAA"));
 
-		Assert.assertEquals(9, userRepository.findAll().size());
+		Assert.assertEquals(9, userRepository.findAll().size());*/
 
 
 
@@ -120,6 +122,9 @@ public class Capter1ApplicationTests {
 
 	@Test
 	public void contextLoads() {
+		UserEntity userEntity = userRepository.findByUserName("15258800630");
+		System.out.println(userEntity);
+
 	}
 
 

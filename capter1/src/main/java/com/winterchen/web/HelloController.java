@@ -19,9 +19,5 @@ public class HelloController {
         return "hello word";
     }
 
-    @GetMapping("/")
-    public String tPage(ModelMap map){
-        map.addAttribute("host","http://winterchen.com");
-        return "index";
-    }
+
 }

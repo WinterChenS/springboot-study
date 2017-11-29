@@ -11,17 +11,23 @@ import org.springframework.data.repository.query.Param;
  * Created by Administrator on 2017/11/21.
  */
 @CacheConfig(cacheNames = "users")
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
-    @Cacheable(key = "#p0")
-    User findByName(String name);
+    /*@Cacheable(key = "#p0")
+    UserEntity findByName(String name);*/
 
-    User findByNameAndAge(String name, Integer age);
+    //UserEntity findByNameAndAge(String name, Integer age);
 
-    @Query("from User u where u.name=:name")
-    User findUser(@Param("name") String name);
+    /*@Query("from User u where u.name=:name")
+    UserEntity findUser(@Param("name") String name);*/
 
-    @CachePut(key = "#p0.name")
-    User save(User user);
+    /*@CachePut(key = "#p0.name")
+    UserEntity save(UserEntity userEntity);*/
+
+    /*@Cacheable(key = "#p0")
+    UserEntity findByPhone(String phone);*/
+
+    @Query("FROM UserEntity u where u.userName=:userName")
+    UserEntity findByUserName(@Param("userName") String userName);
 
 }
