@@ -1,6 +1,7 @@
 package com.winterchen.domain;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  *
@@ -13,7 +14,7 @@ public class UserEntity {
     @GeneratedValue
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String userName;
 
     @Column(nullable = true)
@@ -22,7 +23,7 @@ public class UserEntity {
     @Column(nullable = true)
     private Integer sex;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String password;
 
     @Column(nullable = false)
@@ -42,6 +43,19 @@ public class UserEntity {
 
     @Column(nullable = true)
     private String avatar;
+
+    @Column(nullable = true)
+    private Date createTime;
+
+    @Column(nullable = true)
+    private Date lastChangeTime;
+
+    @Column(nullable = true)
+    private String nikeName;
+
+    @Column(nullable = true)
+    private String QQOpenId;
+
 
     /**
      * @OneToOne：一对一关联
@@ -154,5 +168,37 @@ public class UserEntity {
 
     public void setSourceEntity(SourceEntity sourceEntity) {
         this.sourceEntity = sourceEntity;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getLastChangeTime() {
+        return lastChangeTime;
+    }
+
+    public void setLastChangeTime(Date lastChangeTime) {
+        this.lastChangeTime = lastChangeTime;
+    }
+
+    public String getNikeName() {
+        return nikeName;
+    }
+
+    public void setNikeName(String nikeName) {
+        this.nikeName = nikeName;
+    }
+
+    public String getQQOpenId() {
+        return QQOpenId;
+    }
+
+    public void setQQOpenId(String QQOpenId) {
+        this.QQOpenId = QQOpenId;
     }
 }

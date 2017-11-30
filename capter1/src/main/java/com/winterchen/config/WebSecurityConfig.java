@@ -3,7 +3,9 @@ package com.winterchen.config;
 import com.winterchen.filter.qq.QQAuthenticationFilter;
 import com.winterchen.filter.qq.QQAuthenticationManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
@@ -36,14 +38,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         http
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/user/**").hasRole("USER")
+                .antMatchers("/user/**","/home/**").hasRole("USER")
                 .and()
-                .formLogin().loginPage("/login").defaultSuccessUrl("/user/user")
+                .formLogin().loginPage("/login").defaultSuccessUrl("/home/home")
                 .and()
                 .logout().logoutUrl("/logout").logoutSuccessUrl("/login");
 
         // 在 UsernamePasswordAuthenticationFilter 前添加 QQAuthenticationFilter
         http.addFilterAt(qqAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+    }
+
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/css/**");
+        web.ignoring().antMatchers("/js/**");
+        web.ignoring().antMatchers("/fonts/**");
+        web.ignoring().antMatchers("/img/**");
     }
 
     /**
@@ -53,10 +64,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         QQAuthenticationFilter authenticationFilter = new QQAuthenticationFilter("/login/qq");
         SimpleUrlAuthenticationSuccessHandler successHandler = new SimpleUrlAuthenticationSuccessHandler();
         successHandler.setAlwaysUseDefaultTargetUrl(true);
-        successHandler.setDefaultTargetUrl("/user/user");
+        successHandler.setDefaultTargetUrl("/home/home");
         authenticationFilter.setAuthenticationManager(new QQAuthenticationManager());
         authenticationFilter.setAuthenticationSuccessHandler(successHandler);
         return authenticationFilter;
+    }
+
+
+    /**
+     * 添加 UserDetailsService， 实现自定义登录校验
+     */
+    @Override
+    protected void configure(AuthenticationManagerBuilder builder) throws Exception{
+        builder.userDetailsService(anyUserDetailsService);
     }
 
 }

@@ -31,6 +31,12 @@ public class QQUser {
      */
     private String avatar;
 
+    /**
+     * 用户的唯一标识
+     */
+    private String openId;
+
+
     public String getNickname() {
         return nickname;
     }
@@ -69,5 +75,13 @@ public class QQUser {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
     }
 }

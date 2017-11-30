@@ -48,6 +48,7 @@ public class QQAuthenticationManager implements AuthenticationManager {
             return new UsernamePasswordAuthenticationToken(user,
                     null, AUTHORITIES);
         }
+
         throw new BadCredentialsException("Bad Credentials");
     }
 
@@ -68,6 +69,7 @@ public class QQAuthenticationManager implements AuthenticationManager {
         user.setProvince(json.getString("province"));
         user.setYear(json.getString("year"));
         user.setAvatar(json.getString("figureurl_qq_2"));
+        user.setOpenId(openId);
 
         return user;
     }

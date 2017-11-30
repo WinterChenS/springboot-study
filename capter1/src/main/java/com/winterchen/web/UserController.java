@@ -76,7 +76,7 @@ public class UserController {
     }*/
 
     @ApiOperation(value = "获取用户资料", notes = "登录成功之后的")
-    @GetMapping("/user")
+    @GetMapping("/home")
     public String user(@AuthenticationPrincipal UsernamePasswordAuthenticationToken userAuthentication, Model model){
         QQUser user = (QQUser) userAuthentication.getPrincipal();
         model.addAttribute("username", user.getNickname());

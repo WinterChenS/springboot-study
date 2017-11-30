@@ -25,4 +25,15 @@ public class UserServiceImpl implements UserService {
         UserEntity uu = userRepository.findByUserName(userName);
         return uu;
     }
+
+    @Override
+    public UserEntity findUserByQQOpenId(String openId) {
+
+        if(StringUtils.isEmpty(openId))
+            throw new ArgumentIsNullException("用户的OpenId为空");
+
+        UserEntity userEntity = userRepository.findByQQOPenId(openId);
+
+        return userEntity;
+    }
 }

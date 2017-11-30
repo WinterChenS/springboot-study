@@ -21,6 +21,9 @@ spring:
         hbm2ddl:
           auto: update
         show_sql: true
+  aop:
+    auto: true
+    proxy-target-class: true
 
   mail:
     host: smtp.qq.com
