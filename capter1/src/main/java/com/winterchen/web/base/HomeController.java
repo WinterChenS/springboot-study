@@ -51,7 +51,9 @@ public class HomeController {
     public String doRegister(UserEntity userEntity, Model model){
 
         if (userService.findUserByName(userEntity.getUserName()) != null){
-            throw new RuntimeException();
+            model.addAttribute("userEntity",userEntity);
+            model.addAttribute("error","该用户名已被注册");
+            return "/register";
         }
         if (userService.saveUserEntity(userEntity) != null){
             model.addAttribute("result","注册成功，请登录");
