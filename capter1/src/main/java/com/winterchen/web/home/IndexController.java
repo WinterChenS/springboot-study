@@ -1,4 +1,4 @@
-package com.winterchen.web;
+package com.winterchen.web.home;
 
 import com.winterchen.domain.QQUser;
 import com.winterchen.domain.UserEntity;
@@ -43,9 +43,13 @@ public class IndexController {
             model.addAttribute("nikename", user.getNickname());
             model.addAttribute("avatar", user.getAvatar());
             //进行用户是否是第一次qq授权登录 唯一标示 openId
-
-
-
+            UserEntity userEntity = userService.findUserByQQOpenId(user.getOpenId());
+            if(userEntity == null){
+                userService.saveUserByQQUser(user);
+            }else{
+                userService.updateUserByQQUser(user);
+            }
+            model.addAttribute("id",userEntity.getId());
 
         }else{
             User user = (User) userAuthentication.getPrincipal();
@@ -57,7 +61,8 @@ public class IndexController {
             }
         }
 
-
         return "/home/index";
     }
+
+    
 }

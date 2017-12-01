@@ -1,8 +1,8 @@
 package com.winterchen.service.user;
 
 
+import com.winterchen.domain.QQUser;
 import com.winterchen.domain.UserEntity;
-import org.springframework.security.core.userdetails.User;
 
 /**
  * 用户服务层
@@ -24,4 +24,25 @@ public interface UserService {
      * @return
      */
     UserEntity findUserByQQOpenId(String openId);
+
+    /**
+     * 进行QQ用户的资料更新
+     * @param user
+     * @return
+     */
+    UserEntity updateUserByQQUser(QQUser user);
+
+    /**
+     * 进行QQ用户的添加
+     * @param user
+     * @return
+     */
+    UserEntity saveUserByQQUser(QQUser user);
+
+    /**
+     * 新建用户
+     * @param userEntity
+     * @return
+     */
+    UserEntity saveUserEntity(UserEntity userEntity);
 }

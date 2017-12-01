@@ -1,4 +1,4 @@
-package com.winterchen.web;
+package com.winterchen.web.error;
 
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;

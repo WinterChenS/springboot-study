@@ -1,5 +1,7 @@
 package com.winterchen.domain;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -11,8 +13,9 @@ import java.util.Date;
 public class UserEntity {
 
     @Id
-    @GeneratedValue
-    private Long id;
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
+    @GeneratedValue(generator = "system-uuid")
+    private String id;
 
     @Column(nullable = true)
     private String userName;
@@ -73,12 +76,11 @@ public class UserEntity {
     private SourceEntity sourceEntity;
 
 
-
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

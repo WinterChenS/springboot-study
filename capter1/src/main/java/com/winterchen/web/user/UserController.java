@@ -1,4 +1,4 @@
-package com.winterchen.web;
+package com.winterchen.web.user;
 
 import com.winterchen.domain.QQUser;
 import io.swagger.annotations.ApiOperation;

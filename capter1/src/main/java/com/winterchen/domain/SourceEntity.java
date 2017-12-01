@@ -1,5 +1,7 @@
 package com.winterchen.domain;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 
 /**
@@ -10,8 +12,9 @@ public class SourceEntity {
 
 
     @Id
-    @GeneratedValue
-    private long sourceId;
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
+    @GeneratedValue(generator = "system-uuid")
+    private String sourceId;
 
     /**
      * @OneToOne：一对一关联
@@ -22,11 +25,11 @@ public class SourceEntity {
     @OneToOne(mappedBy = "sourceEntity", fetch= FetchType.EAGER)
     private UserEntity userEntity;
 
-    public long getSourceId() {
+    public String getSourceId() {
         return sourceId;
     }
 
-    public void setSourceId(long sourceId) {
+    public void setSourceId(String sourceId) {
         this.sourceId = sourceId;
     }
 

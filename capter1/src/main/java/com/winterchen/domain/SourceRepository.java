@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * Created by winterchen on 2017/11/29.
  */
 @CacheConfig(cacheNames = "sources")
-public interface SourceRepository extends JpaRepository<SourceEntity, Long> {
+public interface SourceRepository extends JpaRepository<SourceEntity, String> {
 
 
 }

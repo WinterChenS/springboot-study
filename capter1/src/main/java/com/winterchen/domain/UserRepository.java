@@ -4,16 +4,19 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
 /**
- * Created by Administrator on 2017/11/21.
+ * 用户JPA
+ * Created by winterchen on 2017/11/21.
  */
 @CacheConfig(cacheNames = "users")
-public interface UserRepository extends JpaRepository<UserEntity, Long> {
+public interface UserRepository extends JpaRepository<UserEntity, String> {
 
     /*@Cacheable(key = "#p0")
     UserEntity findByName(String name);*/
@@ -37,6 +40,22 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
     @Query("FROM UserEntity u where u.userName=:userName")
     UserEntity findByUserName(@Param("userName") String userName);
 
+    /**
+     * 通过phone查找用户
+     * @param phone
+     * @return
+     */
+    @Query("FROM UserEntity u where u.phone=:phone")
+    UserEntity findByPhone(@Param("phone") String phone);
+
+    /**
+     * 通过Email查找用户
+     * @param email
+     * @return
+     */
+    @Query("FROM UserEntity u where u.email=:email")
+    UserEntity findByEmail(@Param("email") String email);
+
 
     /**
      * 通过QQ的唯一标示OpenId查找用户
@@ -48,20 +67,18 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
     /**
      * 更新QQ用户的资料
-     * @param user
+     * @param avatar
+     * @param nikeName
+     * @param openId
      * @param changeTime
      * @return
      */
-    @Query("UPDATE UserEntity u SET u.avatar=:user.avatar,u.nickname=:user.nikename,u.lastChangeTime=:changeTime WHERE u.QQOpenId=:user.openId")
-    UserEntity updateByQQOpenId(@Param("user") QQUser user, @Param("changeTime")Date changeTime);
+    @Modifying
+    @Transactional
+    @Query("UPDATE UserEntity u SET u.avatar=:avatar,u.nikeName=:nikename,u.lastChangeTime=:changeTime WHERE u.QQOpenId=:openId")
+    UserEntity updateByQQOpenId(@Param("avatar") String avatar, @Param("nikename") String nikeName
+            , @Param("openId") String openId, @Param("changeTime")Date changeTime);
 
-    /**
-     * 插入QQ用户信息
-     * @param qqUser
-     * @param userEntity
-     * @return
-     */
-    @Query("INSERT INTO UserEntity(roles,status,avatar,createTime,nikeName,QQOpenId) values(:u.roles,:u.status,:qquser.avatar,:u.createTime,:qquser.nikeName,:qquser.QQOpenId)")
-    UserEntity saveByQQUser(@Param("qquser") QQUser qqUser, @Param("u") UserEntity userEntity);
+
 
 }
